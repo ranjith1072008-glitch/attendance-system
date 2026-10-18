@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Build outputs
+logo_b64.txt
+build_dashboard.js
+
+# SQLite Database (optional: remove this line if you want to commit DB)
+attendance.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
