@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Attendance Register - MEC</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body class="p-4 md:p-6 min-h-screen">
+  <div class="max-w-6xl mx-auto space-y-6">
+    
+    <!-- Institutional Header with Uploaded College Logo -->
+    <header class="flex items-center pb-4 border-b border-[var(--border)] gap-4 bg-[var(--card)] p-4 rounded-2xl shadow-sm border border-[var(--border)]">
+      <!-- Embedded Uploaded MEC Logo -->
+      <div class="w-16 h-16 rounded-xl bg-white p-1 border border-slate-200 flex items-center justify-center shadow-sm shrink-0 overflow-hidden">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAABcCAYAAADj79JYAAAQAElEQVR4AeydCVxWVd7H/ygpiyWLK+IOWqK5UJlpY1YjJs2ILTNmr8ugkGWlVtbYOzPCNO84U67vpBW4pE20zShULpiOOeGklamlMwYugyulCKYoEMh7vv+Hg4+oxSDPhXrl8/yfc++5Z/3dc//reS71yi7/OYpAPbn85ygClwF3FG6Ry4BfBtxhBBzu7nu7wouKih2Gqma6+14BDsgLF2yQTuFzpV3bl2TWzLWSn3+yZpBwqJXvBeAHDx6XJycvk25dk8XXz0fSVw+TnC8L5bHHd0hg4Avy2KRU2bF9v0OQXVo3dRrwDRuy5I6o+RIb+7YMju4qmVnj5b77IqVBA2+ddVCwtwQF+8us2fuka7e3tOzKFdv0Wl39qnOAwzZee22zso233sqUeS8OlfT0EXLLLeEXxdAFvI+8n1Fkbsx68fKaKbCeushu6gzghw8fk8SE5cqb846dlA83/kJmz46W9u2DLwp05Qt+vl5mxXtL4wAfGTN2s2E3C7VNWFLlsrV1XiXALzS47dsPy9tv7/hOWr06UyDKXmjin27eK0NjXjG0VPrcFC6Hcx6Rh8b3l+BgP6nuX/36Ug68tyQk7pbQ0AVy//1vCn1VbpOngLExxqoSc6/cTlXPqw34X/6yQ3bvyrloP2VnisXH5wr5xz/2SVTUW/LsHz+UgoKzqlxa6hbp2eMlmTNnkzzzu9tl46axMnBgp4u2V50LFvigYB9JScmRyOuWyY295wt9w7pos7S0nrzxxg4dY1RUmknf/Q5KE+ZO3epQtQGns5ihPczgwqVbtxbnUGRkqHmsG8msGX+XUwUn5MCBhyVjw1hp1sxX/jAtXXnsrt0nZc3aEbJ4yTDp2rUlzXmULJ/ftr1IYoZ+IAFByTqW+vXPyKuv/kzy8ibI9Ok3SovmV5hxIJTPJ26cSEO58sqGpkz1PpcEOF1++GG2jBu3QpYs3iiLF29RSk7+WPbs/kpee2OYPPvcUMnP+1oeiH9Nbrh+sXSJCJWyssfk8cdvviS2Qd/VIcvnGzbwkilPf2H4/AsSH7/UjPeIjgmWlpZ2mwG/5zk0aWIbOZZbUp0uz6lzyYDT2ujRXWRqQrQkJNxeQbFj+kpAQCMuG37qL1df3UxOnDgjWVnHJDf3lObX5ldRcVl59w3lmqsbS8uQxuXnIj/9aYSCz6KwNO7BvuZ6HQHcjORbPy1bBsmkx25TgRjWsZH0uXGRjBr5umzZcvBb63niIqv0WG6h/KjfVZK67GbztD2qY2OM39ZfcfGlg037NbLCaaiqNCSmpxowEyb0lt8m/k0FJ9pBVetXp1xpqSg7OJZbIDFDAmXzJ0NVt2cs1WnvUuo4AjirubJK1iuyvSxLHSErVt4ra97bIQGB82Te3PU1ym4s0MfzSyRhakc5dGiM9knf7qAxNsbonuepY0cAX/LKIVXJ+vWdL1iRViVjUjzKCNZ/7x0pgUGNpGvEAvWN7N2by+Vq0anTZbqiqbxgfqTRQGJVxtAXeRBjYCyMCXWRMZLvaXIEcCbR2Fh/m7cWyfDhG4x+PkedUe4OJwQsfhK0hLvviZCHxi0zKucrgj+F+lUhd/68Ynl/yc97SGLdhDdtcCOxaH185uhYGBNj45oT5BjgTMaqZDicnpu+X6zDCUOE65b69g2XleljZeaMW+SvxsDCQGI1siptGZtatgF/jo9rWsGf7xjc3RbRFKfWUGPRduiwULA+GQO6OWMSB/9qDvD/cNBMFkNi1epTaoh4ef2v+rfxqdimIrq2lpmzYmTd+/cL/hV84DNmfCB5eS61khWNejft952VP7+UdJ+482fMduSCr/9cdWqlpuWpikrftg+n01oD3E6UyUONA7zVvx0S4uLhldkN/hXYTZhRKx9/fI2Eh/kZc72v5B+Lk19OiRJ3/mzZBr7y8Q9vE4wc+oBsv7WV1jrgduJn/R5n/dtoDoBny5CiyuGutb7xhg0bkK3E0zFx4nLp0GGxuLMN2tYCdeCrzgDujgUrEXaz5JWvDHgL1fSuDLx7eYAmIsTTMWfObuPH8TGsw9u9SJ05rpOAW3RcwPtLcvIBA/yLFwyjATZAI4StIKxLK9rOxaa1Cjgahh3IxVIE48CBgUYoPigIUVvOaizw7ry8B9WCpKy9frG0Kn1erG5N5Nca4Ey8fdv6xkApNFSihMFCPhMjRdVDA4FnAyz5CNOoqFekU3hShY4eYJxkWK0zZ0SYdgqEupQlpU1uhIsKhT7J53ptUK0BjjrXrp2frFh+m2Rk3KEax6AfXyXk41w6nl9odOp7VAOxwGCwdO32uokg5clXuV7Sr987apXa1Y6DbPvnw+S4MeVtG7SZktJX+6CvLhGBet226XRaa4BjcKx672sZHL1e7rl7lWT/+6jMeyFa1bx1635iWMjoCp2aVd0pfO45mgf1EayzTMSe1Y4/BPBgO0ePjtUbmZcXL4teHio5h/PlF6NXa19LU4/UqkCtNcABxwWat5wuqq/BAITfH6a9J0ToLQs5bILLrOqsXUVG+zhf8/Dxqy/79heb+hkVm4KCTTwUSzPlVQLJL6h+/9VRLwWaPum7tqhWAbeTdmkVJTL5iTB1MpGPGsiqBfiyssmyYH5vwwoKDY8+65eGL0f2aGhYz1B1t8LLeRqoSxsYS9N+f605LBFXH+awlj8OA37h2cJvZ87oruE4SuA3wXjBi4d+DY/GCXX06DgZOaKZAR3gCwWBmmFipb2Mq5cylMU/Q92FCzbQlMqAlJT+ps5ZYaoXaunLccArawiADSAIPEDDuhw+fL1hHxgvPoJ+7ePzvEbaYRUEnQkgZGT8RMEENxxTlKFskInQ4/0bM3aTRpVoEy/kiuUD9QmhPMQ4eEJIOXeKHAU8OLBM1TIm6qICFW4Akp9/Uvr/aIlgXQKaZQEYPwAYM3SdumuJh7Ki8ShSZ6jxAA6OXlt+g1w8nrq0QVsI1IMHjws8HWF8LDfPrPZCadakTCaZwHDvG65UzUgc+nMU8KxdpXL9DU0NP44U4ombP7lHgUAwBgbOkU0fnVLBdrG5D/lpm4pIPysXnv2zn3fR4qiTeuD2xc3at/+MhIY+rzo7wnjPnnGqASUlD5STBWdUxWxoIvhu1Tx66CjgAICZPmbs+xIW1kTVPlYpgnH75yPLrcUCswLPFYwunXyo7siiPLuobuy9SLhRPB3bP79XPYI8NaB11tgpMIK4tRGqw+W669qqFtO+fbAUFpbJgAFvqsuAMVHHKXIUcBe/LFEA0Jfh14GBL+j+v7Dw5hpv/OKL0eXAuwRjjAn6FhY+rDcHXh0YmGSMpBzZmVUiqJEIWNr6MmesDBroZ25WoXTv2lCfILQbwncRXVsZX/s6oS9CaoDOShcpqbBKf5CAs1Kx9uDBTBwei8MJV6qPz4uCZtGpU1PBTGfVzn0+Uo9Pny7WjUTuvBp9mroIWFb8sWMnNUpE+2ybGxLTUzGkTdpm0w/lN/zjlAw1fL+9WekI3uP5BeLkn2MrHLDRpRFePXu8JEzcPs6kjU0Agh2vbds8L+jfrFr0aMD4beIaSTIeQ4QnApE8S+SlpByQXz61WrNonwNiobRFm7RNH+STEvlhDAje1GW3n6O9UMaT5BDgpYaXtteALib61m1F5wlHdyADg67SOVsDZuasGLHAWD5NAXg1NxK1EnWRPPg6abt2zUiU3NsmA9AZA6APuiNCpv0+wmSXGvL8xxHAY4a0kGd+F607VzHRmRZgkVoCyL43+UlmVrzuCWcvIgFffsdDmSGGRRw6NFooQ1modYjInj2jBMFJGfh5SMjL+kuIJk18tS1cu5TlOkS/9vzaaxvLJ59kqz4fHxfKZY+TI4DjlGLTJ7wV0PDeYZJj9DB5KMYIR6xGeDGsICkZJ5O/+kHg96x2tBnK4IadZHTozKzxenNUz46aL8OHuwwmAtPw7V1ZX6rJP3x4CyNMSwy5BCr9FxaO0527sJX338+S30wd7HGw6cARwFl1Awa8Iz0N7/5oU7auSIBDMAIGqxZBCd8NCfmzul557BkgKfwec33e3PVk6V5A2AwnCEU23AMyxg7sgzrwbcx8tmCwHXnyE63VyOKm80QQC+UaYxpgxkYbtOdpcgRwJoFwQ5Vjb7aX10w11RGMgJFh/CGs4H79UikqaCB6UP4FgCLeRm/eqbp0ebYer/2ba0Ooq4y9IuXOKm/BQsWhhXpoBWpa6hbdo85YGBNjO1vTs0f1PNv8ua0DJMAwQYAgcmNLoKYRKoszvBRW49LZXVc5j49rKlu2PiABJroDYGzs55gbhvpIGVuHlHPYDjo8N9bVkqh/hb4ZA2NhTPaaE6mjgNsJHTcRmd43XCUvvxytgpSfBsKHATAp6S5JXTbAqGrwXKjQuAJ6C5t8qB8fv1RXLXo1vB3LE/XRpVMXGj5donXRx2E7sA6eHlgH+jrazMCBTbUM7TlNjgOOgAwPqy/LUu+S2NFL1X8C/4WHzivn0UOMRpKXF2uEYAvB4YRrFnWP3+ckG30cXs3qhLe3a79E0NsRfngRY4zwpa5lH/B4+D+sg9/5cMOIkSI3GMsPFPBSXVFMsEf3hrL+7/fJvfcsFYAGOIhHnF1SnUwoDQBZ7bALHE4uYfqy3hzKWpDsceR1f1GZgAWL8KUufJsb5DJ8fFQuUJ4bhsqZYeQGN4cxHTdPnMgPSA+fOaOX+keY8NJl9+jKZnVybsGz2gUeRQCEVdhrISFBAhuw5+4pYLHtDWeYzceTOHhwWsUNom17jT6TjMqJfs/NQWagZu7ZE2uLeDR1hKUQXGByuUcfks+27TMr+2udFMJND8q/WG0cIjx9fRuoAcNqR6DCBojwIAxtPY4B7PPtcbpnBX0aPk0b2fse1pts2yQPwvAhfezxbQJvR2YwvrxjrjFxzZPkCOA8wgDHRODPaA5slPdtWKpCDgABpk3regL/pRw7ZWE5rPbEhOVkqUWIMMScB2y0EwBDMFJmwIBU9SRi9AAmN3mSMZBo2/aBJ5G94/ySjhsJ60FbirwuRfvw9JcjgON4Ij6JVoFKB0AIwn9nP2AA6mv4e6EQfd/22WhhZV9z9SLJ+bJM/S14+PAmomUADsIQgwng0U4QprRLGcrCMmgLQcmKR1Ph5ybHjVcQCxPDhzbyTYSJt1BgHK1enWdw9jXk+Y8jgBszRENgm7cWGZXuAzU68HswPaw+Vtvhg6M4FVa2BVszzBcgomV07bZEf7KCXg1oLmH6gtAuZUxR/fj5eml/rHhu8NSEaBN0mKAWLkCjwwcaP/ys2fvMTfUxZV2hOa3s4S+HAHfNAiAABo2En550Ck8SggpcRbMgvfW25iTnUeGpUsOT2yhoXAQ4VMG4uGuEa+S5U2VhylPFiieAgQ5vnwb3Ok4cOwq4nRBaQ+MAb9m3/7Rc1dhPTXQABHRUwbnPdze8vbAiGgMPhhfDk+HNqI4Ah1yAh6NlwNNt+xxTPtM4t3gaaJuyqJiDRyreJAAACppJREFUBrpcv7as02mtAI4AQ/BlZMRorJGfhHcMW6KBXgCAN7ssxwIFHscTvBj2AG/ef0gMG/AR5AKsCS1j5gzXTWIDKJYq5WmLJwjjCOHLCue3Q1b/5rrT5DjgFmyswoiIloJGge5Nfr9+72gojRUJu+B3lZOfaK8bhOC71gcCa+IpweLEJcsGIAs6OwHQhGgDFZGwHKA2DvA3geN3lIXxpLjinyVccpQcBRwdmJWNltG8RZAJ6i5U7QS+bgFMMkZJy1aL1XLE/42XD/N8ytOfqYCjnDtCgP7c9F0mSLxW3bZYmzwJtIEpz3XqQMgObgDXa2ulOwR4qVH9SlS4EYAoKiqR0NAkwxa81eQ+F0BvLbd8xV7NZqWiQs59/gZlLzwJesF8cQy/TpjaRcE2WUL5rVsPaRvcSPIsWdB5UgDdrnQErPyQTHvikTzChw79l2zdsl95L484AFgwbIqAnDChoyAMEY7wdgSl5ets+OFJgQAKfo3aZ/VxhGn8A31MDLW1uUHnswz6ZNUDOvyflc5+xZSUW+0QPJo6ssLhqUyMDTiDo981E7qw3gvYTH727Gh128LbARZByYqEr+/ZdZ+pL7qCDxwYJUOMZxFhGBLyZ90J4OPXUHr1fNWs+P4Sb3zotKkV3L54MsQENIYPX6W/G1q8ZFiFuulWzCOH9TzS6kUaxZQuK/tvtS7Z2wcYrsmLrsa4uFBJSr5LOhmPod32hoCE97IiEY7wdYwkwG7VqrG+1QcDBzUTFkL5/BP1hLDeH5/9ie4fpB+GRF8cN77yjPGxRxpjaLL6YLjmFDkKuJ0U1iUOJ/YXIkThw6hqf/rTnWZlLxJWNuDZ8pYNPDd9r/5GH30dsBONj2XK0zuMMPUvD6m5agA6Kx11c9ofBgs3kj5cLOhmjeYjFzCGXDWc+64VwJkek4UdYNbjFyGy38lYnuwXcQebshArM2ZIU1URMWIw6+Hd5HGNMu4E6Ny4kFbz5dlnB2oAuazsUWVB9O1e1snjWgPcfZL4RXyNO/app7qZ7BJlLzz+5kQ/AEqEBq0CoDF4+hmdHXWRPCL/lNHC5ou6ei4l8twfu5sc0V26elDLX3UCcDCATaCJ4LrFVOfxBzQIty0RGgQnkX14OpoGm+4BHXcAWhBlIcujeXpgHbRNH3WB6gzgFgwed6xG/OIAD3vBbYsKh+DE6QRPp7wFHSs09e2RuisLP3tmVrxuq6NMXaM6B7gFiFUJ8ESJ2D2LCS9GlYNd2DKojOQhOHdsPyg8BaxobpotU9fSejUxIH9/n5po5qJtoArCHtBqunZpIAAN8WY2G73BpL9oAzVwwb7R+VKbqhHAp/4mQ9/4wBYET9L69dnStt1VxugpkgCjS19zTZBs+uiITJy43OOUmLjOYH1hg81cqPLnkgD/5psz+iPWNWtHyLRpg2Tq1NuUOIamTOlfke9+jJrGOUS5qhBlH3n0Zpk7d7B8/vl9JgT3jfCqjsTEf5r0CzfabY6hquRRhvoQxxeq57rmcoTVMuD2tgYH+0mjRt7y+uufyebNByQ3t8CAclCys49pflrqVuHmUCYr6ys5cOCEZGXlSn5+oV7/n9+t1h9L7duXJ6tX/0uPn3lmnabkudrL0fbg7YGBfqbrUiFQgUo4ffr1kpYWZazH3oIfJi4uVPCPJ0ztLOnpd+qGIjF/HBN45ocBqJnUwye/bl2MWSjXarmpU6/VdiiLMcY16pjqNfK5pBVeeQTh4UH6GtE17/1TTp86JcXFZYIAC23dRA4dyq8onp6+S3iTcpcuTeXkyRIJCwvU12JT4PSpQhLp3buFvseQk4wPMrXdPn3aclpByck79UW9J098LUeP5EuHjs0kamCodO7cVG7o3UZ69mon4eHB0rxZA63DS4gzs05K1KCu0rRpQ2P++8nGjTnydtoOUydQWoVcIb16tdR67doFStNm/iY/WHbtIsisTVzyV40C/umnh80KzZQ+N4UZsM+YSfmb1X5KOnQIMis/R9A2uBHdujXX16BOm/Z3nUCXiBA5sP+oHhcWlmgaHHylcKOOHCmQzlc303afeuo9vWa/tm4r0ChRQuIXAtjc4NlzPpOoqDDZZly0tJm6bKu0Cg3WKhs27DXsZqvwxP1m6q3y7ru75cSJIuHng+vWZcvYuH7CHHbuzBFuciP/emb8RbogtIEa+KoRwNnpxFgeeeQmYRX17NlK+t8SLs2aNTI+jjMm0OAnY8b01C0QfW7qKKxurlG+kWFFrFyMHlb88Psjhfb692+nq5oUL2FERHP59a8HCH/Fxa6bgr+kX7+VJstbBgxYaYBeZW5MnnTr9pawbQ7iH3M88cQWU0ZkyJC1JuARoNd69fqrcaLlCDIgOfmAQJ07v6bnBLjZIjfLRPVtW2y9QDPShi7hq9qAN2t6hTz15Cq5//43JTY2VenRR98ViLzx41fIk0+mC+nTU1ZqSjnOuU4eZcmDyCPlOilk80hteY5/9au15qa10Bf28pOS/4RQJc8tH2ja+m6iHgTv9/U5U23Iqw04K3JZ6gjloZjW30b4mytfv1Be5TLu55XLp6ePMALRecK4Yu7VRbzagFe3w//v9RwFHH/IvLnrNeCbmXnkPOzh3ZUzKce248r5nPOiA3bBJiSs0Y2Z5OXnnxT85LzB07bHe8rZ1kb/lIEYh3s98pwgRwFHGPn4eBu1q434+7tUNeKVAMdkeZsE/3GEY4hfRfCPOnZmFnN6HqGzdwxrYVTOr4UwHAUGRb0urVsHqPaBHKDtXr1SZMTI6+XhRzapVsNN2rotV1VA6tkbQ31Pk6OAt2juJU2aBkiTJo2EiA2rDAGIkcNL2wmr4SbYvv2wsPqui1wiD45bqa/auBAQRI749wF33tnZXPY2htRJY+rnSeyYvsaI6S4fG7MfVXDkiNaC5vT0lG6qLq5KPySjRnVTLYhofXb2cVPfmY+jgDdo4GV03y9k4YJNOjsMCu/6Z2Ty5H5GU+gkWHYLF90poaFXSmLiJuFds/MXREtunpeWv9AXK3jIkBVGf75bSkuZjutpsE8QunhwsMu5Vs+rWL468o024+fnp6lIfWMzuNTM8gyPJozQox24N86r7/C32G1opL+IjTQAJwnsw72sPcYlYF2ylcvAr3nBO+Y3K5h/ESPSQPX4vLxThm15C0bVjn+e0Oay9xUqG/HzFcGg0kwpVTvBdez5b0cB56faP//ZW8J+bkJlCLLNm3OEn4w0aeIrPXoEye0/TlNfy4QJPTR6//QvV0r7tvUVCTYPIQD1xHzNnr3ROLHKjINso5YtKCgVNgXd2HuRRA/+q8yafatgVO3813FjFL0ib7y+x6ThMmHijSZdpeOYNDFc2ZtpzpGPo4B/9PEoSXt7uBIvjCGiftddXYQIPj4XgsKffPxz4R8pzZ4dLemrh+krOfBGgsbRo+OVF3MMTZnyI+EdhSkpd+v/bkMu0Ma7y4fJp1ti1ZNJu/z85MUXByuL4pxdtNR74817haeMtpyiek51RD8BAY3UA4h3kYlD7FUh5TrEOSlkjynPuU05hqhHniXyIIAnj2NLti17znXK2XOnUkcBd2pSHuinxpq8DHiNQVm1hi4DXjWcaqzUZcBrDMqqNfR/AAAA//+OzXZGAAAABklEQVQDAMsmbSogBuQHAAAAAElFTkSuQmCC" alt="MEC Logo" class="w-full h-full object-contain">
+      </div>
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h1 class="text-base md:text-xl font-bold tracking-tight text-[var(--foreground)]">MUTHAYAMMAL ENGINEERING COLLEGE</h1>
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">Autonomous</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- STUDENT DETAILS CARD -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-sm space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-[var(--border)]">
+        <div>
+          <h3 class="font-bold text-sm text-[var(--foreground)]">
+            Student Details
+          </h3>
+        </div>
+        <span class="text-xs px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium">
+          Permanent Storage
+        </span>
+      </div>
+
+      <form onsubmit="handleRegisterStudent(event)" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Student Full Name *</label>
+            <input id="reg-name" type="text" required placeholder="Student full name..." class="w-full px-3 py-2 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Roll Number / Register No *</label>
+            <input id="reg-roll" type="text" required placeholder="e.g. 23CS101..." class="w-full px-3 py-2 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Academic Year *</label>
+            <select id="reg-year" class="w-full px-3 py-2 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs font-semibold text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+              <option value="I">I Year</option>
+              <option value="II" selected>II Year</option>
+              <option value="III">III Year</option>
+              <option value="IV">IV Year</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Department *</label>
+            <select id="reg-dept" onchange="onRegDeptChanged()" class="w-full px-3 py-2 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs font-semibold text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+              <option value="CSE" selected>CSE</option>
+              <option value="MECH">MECH</option>
+              <option value="EEE">EEE</option>
+              <option value="BIO-TECH">BIO-TECH</option>
+              <option value="CSE [CYBER SECURITY]">CSE [CYBER SECURITY]</option>
+              <option value="CSE [AI&ML]">CSE [AI&ML]</option>
+              <option value="CSE [CSBS]">CSE [CSBS]</option>
+              <option value="CSE [VLSI]">CSE [VLSI]</option>
+              <option value="ECE">ECE</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[var(--muted-foreground)] mb-1">Section *</label>
+            <select id="reg-section" class="w-full px-3 py-2 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs font-semibold text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+              <!-- Dynamically populated based on Department selection -->
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end pt-1">
+          <button type="submit" class="px-5 py-2 rounded-lg text-xs md:text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow transition-all">
+            Save Student Record
+          </button>
+        </div>
+      </form>
+      <div id="action-notification" class="hidden p-2.5 rounded-lg text-xs font-medium"></div>
+    </div>
+
+    <!-- STUDENT ATTENDANCE REGISTER -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-sm overflow-hidden">
+      
+      <!-- Filter Bar: Department, Year, Section, Date -->
+      <div class="p-5 border-b border-[var(--border)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h3 class="font-bold text-sm text-[var(--foreground)]">
+            Student Attendance Register
+          </h3>
+          <p class="text-xs text-[var(--muted-foreground)] mt-0.5">
+            Filter by Department, Year, and Section. Next day defaults to ABSENT automatically.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <!-- Department Filter -->
+          <div class="flex items-center gap-1.5">
+            <label for="filter-dept" class="text-xs font-semibold text-[var(--muted-foreground)]">Dept:</label>
+            <select id="filter-dept" onchange="onFilterDeptChanged()" class="px-2.5 py-1.5 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs font-semibold text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+              <option value="ALL">All Depts</option>
+              <option value="CSE" selected>CSE</option>
+              <option value="MECH">MECH</option>
+              <option value="EEE">EEE</option>
+              <option value="BIO-TECH">BIO-TECH</option>
+              <option value="CSE [CYBER SECURITY]">CSE [CYBER SECURITY]</option>
+              <option value="CSE [AI&ML]">CSE [AI&ML]</option>
+              <option value="CSE [CSBS]">CSE [CSBS]</option>
+              <option value="CSE [VLSI]">CSE [VLSI]</option>
+              <option value="ECE">ECE</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+
+          <!-- Year Filter -->
+          <div class="flex items-center gap-1.5">
+            <label for="filter-year" class="text-xs font-semibold text-[var(--muted-foreground)]">Year:</label>
+            <select id="filter-year" onchange="renderTable()" class="px-2.5 py-1.5 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs font-semibold text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+              <option value="ALL">All Years</option>
+              <option value="I">I Year</option>
+              <option value="II" selected>II Year</option>
+              <option value="III">III Year</option>
+              <option value="IV">IV Year</option>
+            </select>
+          </div>
+
+          <!-- Section Filter -->
+          <div class="flex items-center gap-1.5">
+            <label for="filter-section" class="text-xs font-semibold text-[var(--muted-foreground)]">Section:</label>
+            <select id="filter-section" onchange="renderTable()" class="px-2.5 py-1.5 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs font-semibold text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+              <!-- Dynamically populated based on dept filter -->
+            </select>
+          </div>
+
+          <!-- Date Selector -->
+          <div class="flex items-center gap-1.5">
+            <label for="att-date" class="text-xs font-semibold text-[var(--muted-foreground)]">Date:</label>
+            <input id="att-date" type="date" onchange="onDateChanged()" class="px-2.5 py-1.5 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs font-semibold text-[var(--foreground)] focus:outline-none focus:ring-1 focus:ring-indigo-500">
+          </div>
+
+          <!-- Batch Action Buttons -->
+          <div class="flex items-center gap-1.5">
+            <button onclick="setAllAttendance('PRESENT')" class="px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              All Present
+            </button>
+            <button onclick="setAllAttendance('ABSENT')" class="px-2.5 py-1 rounded-md text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30">
+              All Absent
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-[var(--background)]/60 border-b border-[var(--border)] text-xs">
+        <div>
+          <span class="text-[var(--muted-foreground)]">Showing Students:</span>
+          <strong id="stat-total" class="text-[var(--foreground)] ml-1">0</strong>
+        </div>
+        <div>
+          <span class="text-emerald-400 font-medium">Present:</span>
+          <strong id="stat-present" class="text-emerald-400 ml-1">0</strong>
+        </div>
+        <div>
+          <span class="text-rose-400 font-medium">Absent:</span>
+          <strong id="stat-absent" class="text-rose-400 ml-1">0</strong>
+        </div>
+        <div>
+          <span class="text-sky-400 font-medium">On Duty (OD):</span>
+          <strong id="stat-od" class="text-sky-400 ml-1">0</strong>
+        </div>
+      </div>
+
+      <!-- ATTENDANCE REGISTER TABLE -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-[var(--background)] text-[var(--muted-foreground)] border-b border-[var(--border)]">
+            <tr>
+              <th class="px-5 py-3 font-semibold">Roll No</th>
+              <th class="px-5 py-3 font-semibold">Student Name</th>
+              <th class="px-5 py-3 font-semibold">Year</th>
+              <th class="px-5 py-3 font-semibold">Department</th>
+              <th class="px-5 py-3 font-semibold">Section</th>
+              <th class="px-5 py-3 font-semibold">Mark Attendance Status</th>
+              <th class="px-5 py-3 font-semibold">Current State</th>
+            </tr>
+          </thead>
+          <tbody id="student-attendance-tbody" class="divide-y divide-[var(--border)] text-[var(--foreground)]">
+            <!-- Dynamically populated from permanent records -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Exact Department & Section Configuration
+    const DEPARTMENTS_CONFIG = {
+      'CSE': ['A', 'B', 'C', 'D', 'E'],
+      'MECH': ['A', 'B', 'C'],
+      'EEE': ['A', 'B', 'C', 'D'],
+      'BIO-TECH': ['A'],
+      'CSE [CYBER SECURITY]': ['A'],
+      'CSE [AI&ML]': ['A'],
+      'CSE [CSBS]': ['A'],
+      'CSE [VLSI]': ['A'],
+      'ECE': ['A', 'B', 'C', 'D'],
+      'IT': ['A', 'B', 'C', 'D']
+    };
+
+    // PERMANENT STORAGE
+    const STORAGE_KEY_STUDENTS = 'mec_permanent_students_registry_v3';
+    const STORAGE_KEY_ATTENDANCE = 'mec_permanent_attendance_ledger_v3';
+
+    let registeredStudents = loadRegisteredStudents();
+    let attendanceLedger = loadAttendanceLedger();
+
+    // Default Date to Today
+    const todayISO = new Date().toISOString().split('T')[0];
+    document.getElementById('att-date').value = todayISO;
+
+    function loadRegisteredStudents() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_STUDENTS) || localStorage.getItem('mec_permanent_students_registry_v2');
+        if (saved) return JSON.parse(saved);
+      } catch (e) {}
+      return [];
+    }
+
+    function saveRegisteredStudents() {
+      try {
+        localStorage.setItem(STORAGE_KEY_STUDENTS, JSON.stringify(registeredStudents));
+      } catch (e) {}
+    }
+
+    function loadAttendanceLedger() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_ATTENDANCE) || localStorage.getItem('mec_permanent_attendance_ledger_v2');
+        if (saved) return JSON.parse(saved);
+      } catch (e) {}
+      return {};
+    }
+
+    function saveAttendanceLedger() {
+      try {
+        localStorage.setItem(STORAGE_KEY_ATTENDANCE, JSON.stringify(attendanceLedger));
+      } catch (e) {}
+    }
+
+    function onRegDeptChanged() {
+      const dept = document.getElementById('reg-dept').value;
+      const sections = DEPARTMENTS_CONFIG[dept] || ['A'];
+      const select = document.getElementById('reg-section');
+      select.innerHTML = sections.map(sec => `<option value="${sec}">Section ${sec}</option>`).join('');
+    }
+
+    function onFilterDeptChanged() {
+      const dept = document.getElementById('filter-dept').value;
+      const select = document.getElementById('filter-section');
+      if (dept === 'ALL') {
+        select.innerHTML = '<option value="ALL">All Sections</option><option value="A">Section A</option><option value="B">Section B</option><option value="C">Section C</option><option value="D">Section D</option><option value="E">Section E</option>';
+      } else {
+        const sections = DEPARTMENTS_CONFIG[dept] || ['A'];
+        select.innerHTML = '<option value="ALL">All Sections</option>' + sections.map(sec => `<option value="${sec}">Section ${sec}</option>`).join('');
+      }
+      renderTable();
+    }
+
+    function handleRegisterStudent(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value.trim();
+      const roll = document.getElementById('reg-roll').value.trim().toUpperCase();
+      const year = document.getElementById('reg-year').value;
+      const dept = document.getElementById('reg-dept').value;
+      const section = document.getElementById('reg-section').value;
+
+      if (!name || !roll || !dept || !section) return;
+
+      const existing = registeredStudents.find(s => s.roll === roll);
+      if (existing) {
+        showNotification('Student with Roll No ' + roll + ' already exists in registry.', false);
+        return;
+      }
+
+      const newStudent = {
+        id: 'stud_' + roll.replace(/[^A-Z0-9]/g, ''),
+        roll: roll,
+        name: name,
+        year: year,
+        dept: dept,
+        section: section
+      };
+
+      registeredStudents.push(newStudent);
+      saveRegisteredStudents();
+
+      document.getElementById('filter-dept').value = dept;
+      onFilterDeptChanged();
+      document.getElementById('filter-year').value = year;
+      document.getElementById('filter-section').value = section;
+
+      // Default new student status is ABSENT until marked
+      const curDate = document.getElementById('att-date').value;
+      const key = newStudent.id + '_' + curDate;
+      if (!attendanceLedger[key]) {
+        attendanceLedger[key] = 'ABSENT';
+        saveAttendanceLedger();
+      }
+
+      document.getElementById('reg-name').value = '';
+      document.getElementById('reg-roll').value = '';
+      document.getElementById('reg-name').focus();
+
+      renderTable();
+      showNotification('Saved: ' + name + ' (' + roll + ') - ' + dept + ', Year ' + year + ', Sec ' + section + '.');
+    }
+
+    function setStudentStatus(studentId, newStatus) {
+      const curDate = document.getElementById('att-date').value;
+      const key = studentId + '_' + curDate;
+      attendanceLedger[key] = newStatus;
+      saveAttendanceLedger();
+
+      const student = registeredStudents.find(s => s.id === studentId);
+      renderTable();
+      showNotification('Stored ' + student.name + ' as ' + newStatus + ' (' + curDate + ').');
+    }
+
+    function setAllAttendance(status) {
+      const deptFilter = document.getElementById('filter-dept').value;
+      const yearFilter = document.getElementById('filter-year').value;
+      const sectionFilter = document.getElementById('filter-section').value;
+
+      const filtered = registeredStudents.filter(s => {
+        const matchesDept = deptFilter === 'ALL' || s.dept === deptFilter;
+        const matchesYear = yearFilter === 'ALL' || s.year === yearFilter;
+        const matchesSec = sectionFilter === 'ALL' || s.section === sectionFilter;
+        return matchesDept && matchesYear && matchesSec;
+      });
+
+      if (filtered.length === 0) return;
+
+      const curDate = document.getElementById('att-date').value;
+      filtered.forEach(s => {
+        const key = s.id + '_' + curDate;
+        attendanceLedger[key] = status;
+      });
+      saveAttendanceLedger();
+      renderTable();
+      showNotification('Marked all ' + filtered.length + ' students as ' + status + ' (' + curDate + ').');
+    }
+
+    function onDateChanged() {
+      // When date changes, render table. Unmarked students will automatically default to ABSENT
+      renderTable();
+    }
+
+    function renderStatusBadge(status) {
+      if (status === 'PRESENT') {
+        return '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">PRESENT</span>';
+      }
+      if (status === 'ABSENT') {
+        return '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/20 text-rose-400 border border-rose-500/30">ABSENT</span>';
+      }
+      if (status === 'HALF_DAY') {
+        return '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30">HALF DAY</span>';
+      }
+      if (status === 'OD') {
+        return '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/20 text-sky-400 border border-sky-500/30 font-bold">ON DUTY (OD)</span>';
+      }
+      return '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/20 text-rose-400 border border-rose-500/30">ABSENT</span>';
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('student-attendance-tbody');
+      const curDate = document.getElementById('att-date').value;
+      const deptFilter = document.getElementById('filter-dept').value;
+      const yearFilter = document.getElementById('filter-year').value;
+      const sectionFilter = document.getElementById('filter-section').value;
+
+      const filteredStudents = registeredStudents.filter(s => {
+        const matchesDept = deptFilter === 'ALL' || s.dept === deptFilter;
+        const matchesYear = yearFilter === 'ALL' || (s.year || 'II') === yearFilter;
+        const matchesSec = sectionFilter === 'ALL' || (s.section || 'A') === sectionFilter;
+        return matchesDept && matchesYear && matchesSec;
+      });
+
+      document.getElementById('stat-total').innerText = filteredStudents.length;
+
+      if (filteredStudents.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="px-5 py-8 text-center text-[var(--muted-foreground)]">
+              <div class="text-base font-semibold text-[var(--foreground)] mb-1">No Students Found for Selection</div>
+              <p class="text-xs">
+                Filter: ${deptFilter !== 'ALL' ? deptFilter : 'All Depts'} | ${yearFilter !== 'ALL' ? yearFilter + ' Year' : 'All Years'} | ${sectionFilter !== 'ALL' ? 'Sec ' + sectionFilter : 'All Secs'}
+              </p>
+              <p class="text-xs mt-1 text-[var(--muted-foreground)]">Enrol students above selecting Department, Year, and Section.</p>
+            </td>
+          </tr>
+        `;
+        document.getElementById('stat-present').innerText = 0;
+        document.getElementById('stat-absent').innerText = 0;
+        document.getElementById('stat-od').innerText = 0;
+        return;
+      }
+
+      let presentCount = 0;
+      let absentCount = 0;
+      let odCount = 0;
+
+      tbody.innerHTML = filteredStudents.map(student => {
+        const key = student.id + '_' + curDate;
+        
+        // NEXT DAY DEFAULT: Default status for any new date is strictly ABSENT
+        const currentStatus = attendanceLedger[key] || 'ABSENT';
+
+        if (currentStatus === 'PRESENT') presentCount++;
+        else if (currentStatus === 'ABSENT') absentCount++;
+        else if (currentStatus === 'OD') odCount++;
+        else if (currentStatus === 'HALF_DAY') presentCount += 0.5;
+
+        const yearLabel = student.year || 'II';
+        const secLabel = student.section || 'A';
+        const deptLabel = student.dept || 'CSE';
+
+        return `
+          <tr class="hover:bg-[var(--background)]/50">
+            <td class="px-5 py-3 font-mono font-bold text-indigo-400">${student.roll}</td>
+            <td class="px-5 py-3 font-semibold">${student.name}</td>
+            <td class="px-5 py-3">
+              <span class="px-2 py-0.5 rounded-md text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                ${yearLabel} Year
+              </span>
+            </td>
+            <td class="px-5 py-3 font-medium text-[var(--foreground)]">${deptLabel}</td>
+            <td class="px-5 py-3">
+              <span class="px-2 py-0.5 rounded-md text-xs font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                Sec ${secLabel}
+              </span>
+            </td>
+            
+            <td class="px-5 py-3">
+              <div class="inline-flex rounded-lg border border-[var(--border)] bg-[var(--background)] p-0.5 gap-1">
+                <button onclick="setStudentStatus('${student.id}', 'PRESENT')" class="px-2 py-1 rounded text-xs font-semibold transition-all ${currentStatus === 'PRESENT' ? 'bg-emerald-600 text-white shadow' : 'text-[var(--muted-foreground)] hover:text-emerald-400'}">
+                  P
+                </button>
+                <button onclick="setStudentStatus('${student.id}', 'ABSENT')" class="px-2 py-1 rounded text-xs font-semibold transition-all ${currentStatus === 'ABSENT' ? 'bg-rose-600 text-white shadow' : 'text-[var(--muted-foreground)] hover:text-rose-400'}">
+                  A
+                </button>
+                <button onclick="setStudentStatus('${student.id}', 'HALF_DAY')" class="px-2 py-1 rounded text-xs font-semibold transition-all ${currentStatus === 'HALF_DAY' ? 'bg-amber-600 text-white shadow' : 'text-[var(--muted-foreground)] hover:text-amber-400'}">
+                  HD
+                </button>
+                <button onclick="setStudentStatus('${student.id}', 'OD')" class="px-2 py-1 rounded text-xs font-semibold transition-all ${currentStatus === 'OD' ? 'bg-sky-600 text-white shadow' : 'text-[var(--muted-foreground)] hover:text-sky-400'}">
+                  OD
+                </button>
+              </div>
+            </td>
+
+            <td class="px-5 py-3">
+              ${renderStatusBadge(currentStatus)}
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('stat-present').innerText = presentCount;
+      document.getElementById('stat-absent').innerText = absentCount;
+      document.getElementById('stat-od').innerText = odCount;
+    }
+
+    function showNotification(msg, isSuccess = true) {
+      const el = document.getElementById('action-notification');
+      el.className = `p-2.5 rounded-lg text-xs font-medium ${isSuccess ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'}`;
+      el.innerText = msg;
+      el.classList.remove('hidden');
+      setTimeout(() => el.classList.add('hidden'), 4000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      onRegDeptChanged();
+      onFilterDeptChanged();
+      renderTable();
+    });
+  </script>
+</body>
+</html>
