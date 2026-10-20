@@ -5,7 +5,7 @@
 
 ## 1. The Idea (Vision)
 
-This system was built to solve a real problem faced by faculty at Muthayammal Engineering College:
+This system was built to solve a real problem faced by student at Muthayammal Engineering College:
 
 > **"Taking attendance daily is time-consuming and error-prone when using paper registers or complex software."**
 
@@ -20,7 +20,7 @@ The solution: a **lightweight, browser-based, offline-capable** attendance syste
 ## 2. Pages & Navigation
 
 ### Page 1 — Student Details
-Faculty fills student details **once**:
+student details **once**:
 | Field | Values |
 |---|---|
 | Student Full Name | Text |
